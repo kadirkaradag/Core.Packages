@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Core.Persistence.Repositories;
 
-public interface IAsyncRepository<TEntity, TEntityId>: IQueryable<TEntity> where TEntity : Entity<TEntityId> //Hangi tip ile çalışacağız ? TEntity tipi ile. Bu crud işlemlerinin çoğu Id ile gerçekleşir onun da veri tipini vermek istiyoruz 
+public interface IAsyncRepository<TEntity, TEntityId>: IQuery<TEntity> where TEntity : Entity<TEntityId> //Hangi tip ile çalışacağız ? TEntity tipi ile. Bu crud işlemlerinin çoğu Id ile gerçekleşir onun da veri tipini vermek istiyoruz 
     //TEntity, daha önce oluşturduğumuz Entity<TId> den inherit edilmesini bekliyoruz. Bunu yaparak geliştiricinin kafasına göre bir şey yazmamasını sağlıyoruz sadece Entity<> den inherit edilmiş domain nesnesi istiyoruz.
 {
     Task<TEntity?> GetAsync(
@@ -47,14 +47,14 @@ public interface IAsyncRepository<TEntity, TEntityId>: IQueryable<TEntity> where
 
     Task<TEntity> AddAsync(TEntity entity);
 
-    Task<ICollection<TEntity>> AddRangeAsync(ICollection<TEntity> entity);
+    Task<ICollection<TEntity>> AddRangeAsync(ICollection<TEntity> entities);
 
     Task<TEntity> UpdateAsync(TEntity entity);
 
-    Task<ICollection<TEntity>> UpdateRangeAsync(ICollection<TEntity> entity);
+    Task<ICollection<TEntity>> UpdateRangeAsync(ICollection<TEntity> entities);
 
     Task<TEntity> DeleteAsync(TEntity entity, bool permanent = false); // permanent kalıcı demek, yani db den sileyim mi yoksa silindi diye işaretleyeyim mi. false diyerek sadece işaretle diyoruz.
 
-    Task<ICollection<TEntity>> DeleteRangeAsync(ICollection<TEntity> entity,bool permanent = false);
+    Task<ICollection<TEntity>> DeleteRangeAsync(ICollection<TEntity> entities, bool permanent = false);
 
 }

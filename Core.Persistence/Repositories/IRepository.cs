@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Core.Persistence.Repositories;
 
-public interface IRepository<TEntity, TEntityId> : IQueryable<TEntity> where TEntity : Entity<TEntityId>
+public interface IRepository<TEntity, TEntityId> : IQuery<TEntity> where TEntity : Entity<TEntityId>
 {
     TEntity? Get(
         Expression<Func<TEntity, bool>> predicate, // lambda ile where kosulu gecicez, deletagion alacak, TEntity dönecek ve boolean bir predicate olacak.
@@ -46,13 +46,13 @@ public interface IRepository<TEntity, TEntityId> : IQueryable<TEntity> where TEn
 
     TEntity Add(TEntity entity);
 
-    ICollection<TEntity> AddRange(ICollection<TEntity> entity);
+    ICollection<TEntity> AddRange(ICollection<TEntity> entities);
 
     TEntity Update(TEntity entity);
 
-    ICollection<TEntity> UpdateRangec(ICollection<TEntity> entity);
+    ICollection<TEntity> UpdateRangec(ICollection<TEntity> entities);
 
     TEntity Delete(TEntity entity, bool permanent = false); // permanent kalıcı demek, yani db den sileyim mi yoksa silindi diye işaretleyeyim mi. false diyerek sadece işaretle diyoruz.
 
-    ICollection<TEntity> DeleteRange(ICollection<TEntity> entity, bool permanent = false);
+    ICollection<TEntity> DeleteRange(ICollection<TEntity> entities, bool permanent = false);
 }

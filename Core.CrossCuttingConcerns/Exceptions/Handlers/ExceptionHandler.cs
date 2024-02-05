@@ -8,9 +8,11 @@ public abstract class ExceptionHandler  //implementasyon bunu implemente edecek 
         exception switch
         {
             BusinessException businessException => HandleException(businessException), // gelen exception BusinessException businessException türündeyse HandleException(businessException), diğer caselerde _ kısmı calısacak.
+            ValidationException validationException => HandleException(validationException),
             _ => HandleException(exception)
         };
 
     protected abstract Task HandleException(BusinessException businessException); // abstract olmasının sebebi inherit eden sınıf doldurmak zorunda olsun
+    protected abstract Task HandleException(ValidationException validationException);
     protected abstract Task HandleException(Exception exception); // diğer durumlarda bu calısacak
 }

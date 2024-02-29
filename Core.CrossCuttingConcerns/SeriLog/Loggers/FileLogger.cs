@@ -23,7 +23,7 @@ public class FileLogger : LoggerServiceBase
             rollingInterval: RollingInterval.Day,
             retainedFileCountLimit:null,
             fileSizeLimitBytes:5000000,
-            outputTemplate:"{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{level}] {Message}{NewLine}{Exception}"
+            outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}"
             ).CreateLogger();
         //rollingInterval ne kadar sürede bir yeni dosya olustursun, retainedFileCountLimit dosyalar ne zaman silinsin,fileSizeLimitBytes dosya boyutu maks bu kadar olsun, outputTemplate nasıl tutulacak.
     }
